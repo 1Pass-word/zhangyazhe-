@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            margin: 100px auto;
+            width: 800px;
+            height: 800px;
+            text-align: center;
+            position: relative;
+        }
+
+        .con {
+
+            border: 1px solid black;
+            /* width: 600px; */
+            height: 610px;
+            margin-left: 100px;
+            margin-top: 150px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+
+        .hole {
+            /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 60); */
+
+            border: 1px solid black;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-size: 200px 200px;
+        }
+
+        .btn {
+
+            width: 130px;
+            height: 50px;
+            font-size: 25px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: black;
+            background-size: 400%;
+            color: #fff;
+            cursor: pointer;
+        }
+
+
+        .hole img.mouse {
+            display: none;
+            padding-top: 50px;
+            cursor: pointer;
+        }
+
+        .hole img.boom {
+            display: none;
+            padding-top: 10px;
+            cursor: pointer;
+        }
+
+        .hole img.cat {
+            display: none;
+            padding-top: 40px;
+            cursor: pointer;
+        }
+
+        #time {
+            width: 160px;
+            height: 50px;
+            font-size: 25px;
+            font-weight: 600;
+            line-height: 50px;
+            position: absolute;
+            top: 130px;
+            left: 120px;
+        }
+
+        #fraction {
+            width: 160px;
+            height: 50px;
+            font-size: 25px;
+            font-weight: 600;
+            line-height: 50px;
+            position: absolute;
+            top: 130px;
+            right: 20px;
+        }
+
+        .fraction,
+        .time {
+            font-weight: 600;
+            font-size: 25px;
+        }
+
+        #moshi {
+            width: 500px;
+            height: 100px;
+            position: fixed;
+            top: 110px;
+            left: 100px;
+        }
+
+        #moshi button {
+            width: 100px;
+            height: 50px;
+            background-color: aquamarine;
+            border-radius: 5px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <button class="btn">开始游戏</button>
+        <div id="moshi">
+            <h1>请选择困难度</h1>
+            <button onclick="jiandan(this)">简单</button>
+            <button onclick="jiandan(this)">困难</button>
+            <button onclick="jiandan(this)">地狱</button>
+        </div>
+        <div id="fraction">总得分：<span class="fraction">0</span>分</div>
+        <div id="time">倒计时：<span class="time">60</span>秒</div>
+        <div class="con">
+            <div class="hole">
+                <img src="./猫咪.png" alt="" class="cat" width="130px" height="130px" style="border-radius: 50%" />
+                <img src="./老鼠.png" class="mouse" alt="" width="110px" height="110px" />
+            </div>
+            <div class="hole">
+                <img src="./猫咪.png" alt="" class="cat" width="130px" height="130px" style="border-radius: 50%" />
+                <img src="./老鼠.png" class="mouse" alt="" width="110px" height="110px" />
+            </div>
+            <div class="hole">
+                <img src="./猫咪.png" alt="" class="cat" width="130px" height="130px" style="border-radius: 50%" />
+                <img src="./老鼠.png" class="mouse" alt="" width="110px" height="110px" />
+            </div>
+            <div class="hole">
+                <img src="./猫咪.png" alt="" class="cat" width="130px" height="130px" style="border-radius: 50%" />
+                <img src="./老鼠.png" class="mouse" alt="" width="110px" height="110px" />
+            </div>
+            <div class="hole">
+                <img src="./猫咪.png" alt="" class="cat" width="130px" height="130px" style="border-radius: 50%" />
+                <img src="./老鼠.png" class="mouse" alt="" width="110px" height="110px" />
+            </div>
+            <div class="hole">
+                <img src="./猫咪.png" alt="" class="cat" width="130px" height="130px" style="border-radius: 50%" />
+                <img src="./老鼠.png" class="mouse" alt="" width="110px" height="110px" />
+            </div>
+            <div class="hole">
+                <img src="./猫咪.png" alt="" class="cat" width="130px" height="130px" style="border-radius: 50%" />
+                <img src="./老鼠.png" class="mouse" alt="" width="110px" height="110px" />
+            </div>
+            <div class="hole">
+                <img src="./猫咪.png" alt="" class="cat" width="130px" height="130px" style="border-radius: 50%" />
+                <img src="./老鼠.png" class="mouse" alt="" width="110px" height="110px" />
+            </div>
+            <div class="hole">
+                <img src="./猫咪.png" alt="" class="cat" width="130px" height="130px" style="border-radius: 50%" />
+                <img src="./老鼠.png" class="mouse" alt="" width="110px" height="110px" />
+            </div>
+        </div>
+
+        <script>
+            $(function () {
+                alert('可以选择模式也可以直接开始')
+            })
+            function jiandan(mn) {
+                if (mn.innerHTML == '简单') {
+                    alert('简单模式')
+                    //判断分数改变速度
+                    if (fraction <= 10) {
+                        clearInterval(timer);
+                        speed = 2000;
+                        timer = setInterval(mouseout, speed);
+                    } else if (fraction >= 20 && fraction < 30) {
+                        clearInterval(timer);
+                        speed = 1500;
+                        timer = setInterval(mouseout, speed);
+                    } else if (fraction >= 30 && fraction < 40) {
+                        clearInterval(timer);
+                        speed = 1000;
+                        timer = setInterval(mouseout, speed);
+                    } else if (fraction >= 40) {
+                        clearInterval(timer);
+                        speed = 500;
+                        timer = setInterval(mouseout, speed);
+                    }
+                }
+                if (mn.innerHTML == '困难') {
+                    alert('困难模式')
+                    //判断分数改变速度
+                    if (fraction <= 10) {
+                        clearInterval(timer);
+                        speed = 2000;
+                        timer = setInterval(mouseout, speed);
+                    } else if (fraction >= 20 && fraction < 30) {
+                        clearInterval(timer);
+                        speed = 1300;
+                        timer = setInterval(mouseout, speed);
+                    } else if (fraction >= 30 && fraction < 40) {
+                        clearInterval(timer);
+                        speed = 800;
+                        timer = setInterval(mouseout, speed);
+                    } else if (fraction >= 40) {
+                        clearInterval(timer);
+                        speed = 500;
+                        timer = setInterval(mouseout, speed);
+                    }
+                }
+                if (mn.innerHTML == '地狱') {
+                    alert('地狱模式')
+                    //判断分数改变速度
+                    if (fraction <= 10) {
+                        clearInterval(timer);
+                        speed = 1800;
+                        timer = setInterval(mouseout, speed);
+                    } else if (fraction >= 20 && fraction < 30) {
+                        clearInterval(timer);
+                        speed = 1100;
+                        timer = setInterval(mouseout, speed);
+                    } else if (fraction >= 30 && fraction < 40) {
+                        clearInterval(timer);
+                        speed = 700;
+                        timer = setInterval(mouseout, speed);
+                    } else if (fraction >= 40) {
+                        clearInterval(timer);
+                        speed = 200;
+                        timer = setInterval(mouseout, speed);
+                    }
+                }
+            }
+            var timer = null;
+            //定时器
+            // 获取全部的坑
+            var hole = $(".hole");
+            // 判断是否开始游戏
+            var judge = false
+            // 给开始按钮添加事件
+
+            $(".btn").on("click", function () {
+                if (judge == true) {
+                    alert('游戏已开始')
+                    return
+                }
+                judge = true
+                // 给倒计时赋值
+                $(".time").html("60");
+                //倒计时
+                var countDowns = setInterval(countDown, 1000);
+                // 声明的倒计时时间
+                var timeing = 60;
+                // 倒计时函数
+                function countDown() {
+                    timeing--;
+                    $(".time").html(timeing);
+                    //判断 时间 为零时
+                    if (timeing === 0) {
+                        // 总分
+                        var totalScore = $(".fraction").html();
+                        // 清除倒计时定时器
+                        clearInterval(countDowns);
+                        // 清除老鼠定时器
+                        clearInterval(timer);
+                        // 弹出分数
+                        alert(`游戏结束\n您的总分为：${totalScore}分`);
+                        judge = false
+                        //所有隐藏
+                        hole.children().stop().hide();
+                        // 分数清零
+                        $('.fraction').html('')
+                        //倒计时清零
+                        $(".time").html("");
+                    }
+                }
+                timer = setInterval(mouseout, 1000);
+                // 定时器速度
+                var speed = 1000;
+                // 老鼠定时器 
+                function mouseout() {
+                    // 分数
+                    var fraction = $(".fraction").html();
+
+                    //所有隐藏
+                    hole.children().stop().hide();
+                    // 老鼠的随机数
+                    var x = Math.floor(Math.random() * 9);
+                    var y = Math.floor(Math.random() * 9);
+                    var z = Math.floor(Math.random() * 9);
+                    //猫的随机数
+                    var k = Math.floor(Math.random() * 9);
+
+                    if (
+                        x === y ||
+                        x === z ||
+                        y === z ||
+                        x === k ||
+                        y === k ||
+                        z === k
+                    ) {
+                        mouseout();
+                    } else {
+                        // 老鼠显示
+                        hole.eq(x).children(".mouse").stop().fadeIn();
+                        hole.eq(y).children(".mouse").stop().fadeIn();
+                        hole.eq(z).children(".mouse").stop().fadeIn();
+                        // 猫显示
+                        hole.eq(k).children(".cat").stop().fadeIn();
+                    }
+                }
+                // boom打击显示
+                function clearboom() {
+                    $.each(hole, function (i) {
+                        hole.eq(i).children(".boom").stop().hide();
+                    });
+                }
+                // 打击老鼠的boom
+                $.each(hole, function (i) {
+                    hole
+                        .eq(i)
+                        .children(".mouse")
+                        .on("click", function () {
+                            hole.eq(i).children(".mouse").hide();
+                            hole.eq(i).children(".boom").show();
+                            setTimeout(clearboom, 260);
+                            var funshu = Number($(".fraction").html());
+                            $(".fraction").html(funshu + 1);
+                        });
+                });
+                // 打击猫的boom
+                $.each(hole, function (i) {
+                    hole
+                        .eq(i)
+                        .children(".cat")
+                        .on("click", function () {
+                            hole.eq(i).children(".cat").hide();
+                            hole.eq(i).children(".boom").show();
+                            setTimeout(clearboom, 260);
+                            var funshu = Number($(".fraction").html());
+                            $(".fraction").html(funshu - 1);
+                        });
+                });
+            });
+
+        </script>
+</body>
+
+</html>
