@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/layui@2.8.0/dist/css/layui.css">
+    <script src="https://unpkg.com/layui@2.8.0/dist/layui.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.2/echarts.common.js"></script>
+    <link rel="stylesheet" media="screen and (max-width: 1000px)" href="wn.css">
+</head>
+
+<body>
+    <div class="box">
+        <div class="top">
+            <h1>待办事项</h1>
+            <div class="top2">
+                <div class="top1">
+                    <h2>待发货订单</h2>
+                    <p class="danwei">单位（笔）</p>
+                    <span class="bianse">4</span>
+                </div>
+                <div class="top1">
+                    <h2>待处理售后</h2>
+                    <p class="danwei">单位（笔）</p>
+                    <span class="bianse2">0</span>
+                </div>
+                <div class="top1">
+                    <h2>待付款订单</h2>
+                    <p class="danwei">单位（笔）</p>
+                    <span class="bianse3">113</span>
+                </div>
+                <div class="top1">
+                    <h2>待补货商品</h2>
+                    <p class="danwei">单位（个）</p>
+                    <span class="bianse4">0</span>
+                </div>
+                <div class="top1">
+                    <h2>待审核会员</h2>
+                    <p class="danwei">单位（个）</p>
+                    <span class="bianse5">0</span>
+                </div>
+                <div class="top1">
+                    <h2>待审核佣金</h2>
+                    <p class="danwei">单位（元）</p>
+                    <span class="bianse6">948.19</span>
+                </div>
+            </div>
+        </div>
+        <div class="zhong">
+            <div class="zuo">
+                <span class="jiacu">新增会员</span>
+                <div class="anniu">
+                    <button class="huantian" onclick="shang()">今天</button>
+                    <button class="huantian" onclick="xia()">昨天</button>
+                    <button class="huantian" onclick="zuo11()">近7日</button>
+                    <button class="huantian" onclick="you()">近30日</button>
+                </div>
+                <div class="biaoge" id="chart1"></div>
+            </div>
+            <div class="you">
+                <span class="jiacu">新增订单</span>
+                <div class="anniu">
+                    <button class="huantian" onclick="jin1()">今天</button>
+                    <button class="huantian" onclick="zuo1()">昨天</button>
+                    <button class="huantian" onclick="qiri1()">近7日</button>
+                    <button class="huantian" onclick="yinian1()">近30日</button>
+                </div>
+                <div class="biaoge" id="main"></div>
+            </div>
+        </div>
+        <div class="button">
+            <span class="jiacu">运营数据
+            </span>
+            <div class="anniu">
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <div class="layui-inline" style="display: inline-block;margin-top: 4px;">
+                            <input type="text" class="layui-input demo-laydate-item" lay-options="{}"
+                                placeholder="yyyy-MM-dd">
+                        </div>
+                        <div class="layui-inline" style="display: inline-block;margin-top: 4px;">
+                            <input type="text" class="layui-input demo-laydate-item" lay-options="{}"
+                                placeholder="yyyy-MM-dd">
+                        </div>
+                    </div>
+                </div>
+                <button class="huantian" onclick="jin()">今天</button>
+                <button class="huantian" onclick="zuo()">昨天</button>
+                <button class="huantian" onclick="qiri()">近7日</button>
+                <button class="huantian" onclick="yinian()">近30日</button>
+            </div>
+            <div class="button1">
+                <div class="shuju">
+                    <div class="shuju1">
+                        <h2>成交金额（元）</h2>
+                        <h1>796</h1>
+                        <span>较昨日</span><a href="#">30.6%</a>
+                    </div>
+                    <div class="shuju1">
+                        <h2>退款金额（元）</h2>
+                        <h1>0</h1>
+                        <span>较昨日</span><a href="#">100%</a>
+                    </div>
+                    <div class="shuju1">
+                        <h2>支付订单数（笔）</h2>
+                        <h1>4</h1>
+                        <span>较昨日</span><a href="#">100%</a>
+                    </div>
+                    <div class="shuju1">
+                        <h2>支付人数（人）</h2>
+                        <h1>4</h1>
+                        <span>转换率</span><a href="#">0.5%</a>
+                    </div>
+                    <div class="shuju1">
+                        <h2>客单价（元）</h2>
+                        <h1>199</h1>
+                        <span>较昨日</span><a href="#" class="lv">-34.6%</a>
+                    </div>
+                    <div class="shuju1">
+                        <h2>笔单价（元）</h2>
+                        <h1>199</h1>
+                        <span>较昨日</span><a href="#" class="lv">-34.6%</a>
+                    </div>
+                </div>
+                <div class="biaoge1" id="chart"></div>
+            </div>
+            s
+        </div>
+    </div>
+</body>
+<script>
+    // 初始化 echarts 实例
+    var chart = echarts.init(document.getElementById('chart1'));
+    var shij111 = ['01:00',
+        '02:00',
+        '03:00',
+        '04:00',
+        '05:00',
+        '06:00',
+        '07:00',
+        '08:00',
+        '09:00',
+        '10:00',
+        '11:00',
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+        '18:00',
+        '19:00',
+        '20:00',
+        '21:00',
+        '22:00',
+        '23:00',
+        '24:00']
+    var lanse = [
+        10, 20, 30, 12, 15,
+        184, 15, 654, 25, 19,
+        45, 32, 48, 56, 85,
+        75, 65, 51, 78, 95,
+        65, 85, 32, 95,
+    ]
+    // 配置项
+    var option = {
+        title: {
+            text: ''
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['新增会员']
+        },
+        xAxis: {
+            type: 'category',
+            data: chengji1()
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            smooth: 0.5,
+            symbolSize: 0,
+            name: '新增会员',
+            type: 'line',
+            data: hengji1()
+        }]
+    };
+    function chengji1() {
+        let a = shij111
+        return a
+    }
+    function hengji1() {
+        let a = lanse
+        return a;
+    }
+    // 使用刚指定的配置项和数据显示图表
+    chart.setOption(option);
+    function shang(n) {
+        var shij111 = ['01:00',
+            '02:00',
+            '03:00',
+            '04:00',
+            '05:00',
+            '06:00',
+            '07:00',
+            '08:00',
+            '09:00',
+            '10:00',
+            '11:00',
+            '12:00',
+            '13:00',
+            '14:00',
+            '15:00',
+            '16:00',
+            '17:00',
+            '18:00',
+            '19:00',
+            '20:00',
+            '21:00',
+            '22:00',
+            '23:00',
+            '24:00']
+        var lanse = [
+            10, 20, 30, 12, 15,
+            184, 15, 654, 25, 19,
+            45, 32, 48, 56, 85,
+            75, 65, 51, 78, 95,
+            65, 85, 32, 95,
+        ]
+        // 配置项
+        var option = {
+            title: {
+                text: ''
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['新增会员']
+            },
+            xAxis: {
+                type: 'category',
+                data: chengji1()
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: '新增会员',
+                type: 'line',
+                data: hengji1()
+            }]
+        };
+        function chengji1() {
+            let a = shij111
+            return a
+        }
+        function hengji1() {
+            let a = lanse
+            return a;
+        }
+        // 使用刚指定的配置项和数据显示图表
+        chart.setOption(option);
+    }
+    function xia(a) {
+        var shij111 = ['01:00',
+            '02:00',
+            '03:00',
+            '04:00',
+            '05:00',
+            '06:00',
+            '07:00',
+            '08:00',
+            '09:00',
+            '10:00',
+            '11:00',
+            '12:00',
+            '13:00',
+            '14:00',
+            '15:00',
+            '16:00',
+            '17:00',
+            '18:00',
+            '19:00',
+            '20:00',
+            '21:00',
+            '22:00',
+            '23:00',
+            '24:00']
+        var lanse = [
+            150, 20, 30, 102, 15,
+            184, 15, 254, 25, 19,
+            45, 32, 48, 56, 85,
+            75, 65, 51, 78, 95,
+            65, 85, 32, 195,
+        ]
+        // 配置项
+        var option = {
+            title: {
+                text: ' '
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['新增会员']
+            },
+            xAxis: {
+                type: 'category',
+                data: chengji1()
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: '新增会员',
+                type: 'line',
+                data: hengji1()
+            }]
+        };
+        function chengji1() {
+            let a = shij111
+            return a
+        }
+        function hengji1() {
+            let a = lanse
+            return a;
+        }
+        // 使用刚指定的配置项和数据显示图表
+        chart.setOption(option);
+    }
+    function zuo11(q) {
+        var shij111 = [
+            '2023-5-8',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+        ]
+        var lanse = [
+            10, 20, 30, 12, 15,
+            184, 15
+        ]
+        // 配置项
+        var option = {
+            title: {
+                text: ' '
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['新增会员']
+            },
+            xAxis: {
+                type: 'category',
+                data: chengji1()
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: '新增会员',
+                type: 'line',
+                data: hengji1()
+            }]
+        };
+        function chengji1() {
+            let a = shij111
+            return a
+        }
+        function hengji1() {
+            let a = lanse
+            return a;
+        }
+        // 使用刚指定的配置项和数据显示图表
+        chart.setOption(option);
+    }
+    function you(w) {
+        var shij111 = ['2023-5-1',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+            '2023-5-8',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+            '2023-5-8',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+            '2023-5-8',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+            '2023-5-8',
+            '2023-5-2',
+        ]
+        var lanse = [
+            10, 20, 30, 12, 15,
+            184, 15, 654, 25, 19,
+            45, 32, 48, 56, 85,
+            75, 65, 51, 78, 95,
+            65, 85, 32, 95,
+            78, 95,
+            65, 85, 32, 95,
+        ]
+        // 配置项
+        var option = {
+            title: {
+                text: ' '
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['新增会员']
+            },
+            xAxis: {
+                type: 'category',
+                data: chengji1()
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: '新增会员',
+                type: 'line',
+                data: hengji1()
+            }]
+        };
+        function chengji1() {
+            let a = shij111
+            return a
+        }
+        function hengji1() {
+            let a = lanse
+            return a;
+        }
+        // 使用刚指定的配置项和数据显示图表
+        chart.setOption(option);
+    }
+</script>
+<script>
+    // import * as echarts from 'echarts';
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'), 'purple-passion');
+    // 绘制图表
+    function yinian1() {
+        var shij = ['2023-5-1',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+            '2023-5-8',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+            '2023-5-8',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+            '2023-5-8',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+            '2023-5-8',
+            '2023-5-2',
+        ]
+        var lanse = [
+            10, 20, 30, 12, 15,
+            184, 15, 654, 25, 19,
+            45, 32, 48, 56, 85,
+            75, 65, 51, 78, 95,
+            65, 85, 32, 95,
+            78, 95,
+            65, 85, 32, 95,
+        ]
+        myChart.setOption({
+            grid: {
+                top: 100
+            },
+            title: {
+                //调试标题的样式
+                textStyle: {
+                    color: 'red',
+                    fontSize: 30,
+                    fontWeight: 'bold'
+                },
+                left: 'center'//标题居中显示
+                // show: false
+            },
+            tooltip: {},
+            legend: {
+                data: ['新增订单'],
+                left: 100
+            },
+            xAxis: {
+                //文字
+                data: chengji1()
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: '新增订单',
+                    type: 'bar',
+                    //数量
+                    data: hengji()
+                }
+            ]
+        });
+        function chengji() {
+            let a = shij
+            return a
+        }
+        function hengji() {
+            let a = lanse
+            return a;
+        }
+    }
+    function qiri1() {
+        var shij = [
+            '2023-5-8',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+        ]
+        var lanse = [
+            10, 20, 30, 12, 15,
+            184, 15
+        ]
+        myChart.setOption({
+            grid: {
+                top: 100
+            },
+            title: {
+                //调试标题的样式
+                textStyle: {
+                    color: 'red',
+                    fontSize: 30,
+                    fontWeight: 'bold'
+                },
+                left: 'center'//标题居中显示
+                // show: false
+            },
+            tooltip: {},
+            legend: {
+                data: ['新增订单'],
+                left: 100
+            },
+            xAxis: {
+                //文字
+                data: chengji()
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: '新增订单',
+                    type: 'bar',
+                    //数量
+                    data: hengji()
+                }
+            ]
+        });
+        function chengji() {
+            let a = shij
+            return a
+        }
+        function hengji() {
+            let a = lanse
+            return a;
+        }
+    }
+    function zuo1() {
+        var shij = ['01:00',
+            '02:00',
+            '03:00',
+            '04:00',
+            '05:00',
+            '06:00',
+            '07:00',
+            '08:00',
+            '09:00',
+            '10:00',
+            '11:00',
+            '12:00',
+            '13:00',
+            '14:00',
+            '15:00',
+            '16:00',
+            '17:00',
+            '18:00',
+            '19:00',
+            '20:00',
+            '21:00',
+            '22:00',
+            '23:00',
+            '24:00']
+        var lanse = [
+            150, 20, 30, 102, 15,
+            184, 15, 254, 25, 19,
+            45, 32, 48, 56, 85,
+            75, 65, 51, 78, 95,
+            65, 85, 32, 195,
+        ]
+        myChart.setOption({
+            grid: {
+                top: 100
+            },
+            title: {
+                //调试标题的样式
+                textStyle: {
+                    color: 'red',
+                    fontSize: 30,
+                    fontWeight: 'bold'
+                },
+                left: 'center'//标题居中显示
+                // show: false
+            },
+            tooltip: {},
+            legend: {
+                data: ['新增订单'],
+                left: 100
+            },
+            xAxis: {
+                //文字
+                data: chengji()
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: '新增订单',
+                    type: 'bar',
+                    //数量
+                    data: hengji()
+                }
+            ]
+        });
+        function chengji() {
+            let a = shij
+            return a
+        }
+        function hengji() {
+            let a = lanse
+            return a;
+        }
+    }
+    function jin1() {
+        var shij = ['01:00',
+            '02:00',
+            '03:00',
+            '05:00',
+            '06:00',
+            '07:00',
+            '08:00',
+            '10:00',
+            '11:00',
+            '15:00',
+            '16:00',
+            '18:00',
+            '19:00',
+            '21:00',
+            '23:00',
+            '24:00']
+        var lanse = [
+            10, 20, 30, 12, 15,
+            184, 15, 654, 25, 19,
+            45, 32, 48, 56, 85,
+            75
+        ]
+        myChart.setOption({
+            grid: {
+                top: 100
+            },
+            title: {
+                //调试标题的样式
+                textStyle: {
+                    color: 'red',
+                    fontSize: 30,
+                    fontWeight: 'bold'
+                },
+                left: 'center'//标题居中显示
+                // show: false
+            },
+            tooltip: {},
+            legend: {
+                data: ['新增订单'],
+                left: 100
+            },
+            xAxis: {
+                //文字
+                data: chengji()
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: '新增订单',
+                    type: 'bar',
+                    //数量
+                    data: hengji()
+                }
+            ]
+        });
+        function chengji() {
+            let a = shij
+            return a
+        }
+        function hengji() {
+            let a = lanse
+            return a;
+        }
+    }
+    var shij = ['01:00',
+        '02:00',
+        '03:00',
+        '05:00',
+        '06:00',
+        '07:00',
+        '08:00',
+        '10:00',
+        '11:00',
+        '15:00',
+        '16:00',
+        '18:00',
+        '19:00',
+        '21:00',
+        '23:00',
+        '24:00']
+    var lanse = [
+        10, 20, 30, 12, 15,
+        184, 15, 654, 25, 19,
+        45, 32, 48, 56, 85,
+        75
+    ]
+    myChart.setOption({
+        grid: {
+            top: 100
+        },
+        title: {
+            //调试标题的样式
+            textStyle: {
+                color: 'red',
+                fontSize: 30,
+                fontWeight: 'bold'
+            },
+            left: 'center'//标题居中显示
+            // show: false
+        },
+        tooltip: {},
+        legend: {
+            data: ['新增订单'],
+            left: 100
+        },
+        xAxis: {
+            //文字
+            data: chengji()
+        },
+        yAxis: {},
+        series: [
+            {
+                name: '新增订单',
+                type: 'bar',
+                //数量
+                data: hengji()
+            }
+        ]
+    });
+    function chengji() {
+        let a = shij
+        return a
+    }
+    function hengji() {
+        let a = lanse
+        return a;
+    }
+    // myChart.setOption(setOption);
+    myChart.resize({
+        width: 500,
+        height: 400
+    });
+</script>
+<script>
+    layui.use(function () {
+        var laydate = layui.laydate;
+        // 渲染
+        laydate.render({
+            elem: '.demo-laydate-item'
+        });
+    });
+</script>
+<script>
+    // 初始化 echarts 实例
+    var chart = echarts.init(document.getElementById('chart'));
+    var shij = ['01:00',
+        '02:00',
+        '03:00',
+        '04:00',
+        '05:00',
+        '06:00',
+        '07:00',
+        '08:00',
+        '09:00',
+        '10:00',
+        '11:00',
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+        '18:00',
+        '19:00',
+        '20:00',
+        '21:00',
+        '22:00',
+        '23:00',
+        '24:00']
+    var lanse = [
+        10, 20, 30, 12, 15,
+        184, 15, 654, 25, 19,
+        45, 32, 48, 56, 85,
+        75, 65, 51, 78, 95,
+        65, 85, 32, 95,
+    ]
+    // 配置项
+    var option = {
+        title: {
+            text: ' '
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['成交金额']
+        },
+        xAxis: {
+            type: 'category',
+            data: chengji()
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            smooth: 0.5,
+            symbolSize: 0,
+            name: '成交金额',
+            type: 'line',
+            data: hengji()
+        }]
+    };
+    function chengji() {
+        let a = shij
+        return a
+    }
+    function hengji() {
+        let a = lanse
+        return a;
+    }
+    // 使用刚指定的配置项和数据显示图表
+    chart.setOption(option);
+    function jin() {
+        var shij = ['01:00',
+            '02:00',
+            '03:00',
+            '04:00',
+            '05:00',
+            '06:00',
+            '07:00',
+            '08:00',
+            '09:00',
+            '10:00',
+            '11:00',
+            '12:00',
+            '13:00',
+            '14:00',
+            '15:00',
+            '16:00',
+            '17:00',
+            '18:00',
+            '19:00',
+            '20:00',
+            '21:00',
+            '22:00',
+            '23:00',
+            '24:00']
+        var lanse = [
+            10, 20, 30, 12, 15,
+            184, 15, 654, 25, 19,
+            45, 32, 48, 56, 85,
+            75, 65, 51, 78, 95,
+            65, 85, 32, 95,
+        ]
+        // 配置项
+        var option = {
+            title: {
+                text: ' '
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['成交金额']
+            },
+            xAxis: {
+                type: 'category',
+                data: chengji()
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: '成交金额',
+                type: 'line',
+                data: hengji()
+            }]
+        };
+        function chengji() {
+            let a = shij
+            return a
+        }
+        function hengji() {
+            let a = lanse
+            return a;
+        }
+        // 使用刚指定的配置项和数据显示图表
+        chart.setOption(option);
+    }
+    function zuo() {
+        var shij = ['01:00',
+            '02:00',
+            '03:00',
+            '04:00',
+            '05:00',
+            '06:00',
+            '07:00',
+            '08:00',
+            '09:00',
+            '10:00',
+            '11:00',
+            '12:00',
+            '13:00',
+            '14:00',
+            '15:00',
+            '16:00',
+            '17:00',
+            '18:00',
+            '19:00',
+            '20:00',
+            '21:00',
+            '22:00',
+            '23:00',
+            '24:00']
+        var lanse = [
+            150, 20, 30, 102, 15,
+            184, 15, 254, 25, 19,
+            45, 32, 48, 56, 85,
+            75, 65, 51, 78, 95,
+            65, 85, 32, 195,
+        ]
+        // 配置项
+        var option = {
+            title: {
+                text: ' '
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['成交金额']
+            },
+            xAxis: {
+                type: 'category',
+                data: chengji()
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: '成交金额',
+                type: 'line',
+                data: hengji()
+            }]
+        };
+        function chengji() {
+            let a = shij
+            return a
+        }
+        function hengji() {
+            let a = lanse
+            return a;
+        }
+        // 使用刚指定的配置项和数据显示图表
+        chart.setOption(option);
+    }
+    function qiri() {
+        var shij = [
+            '2023-5-8',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+        ]
+        var lanse = [
+            10, 20, 30, 12, 15,
+            184, 15
+        ]
+        // 配置项
+        var option = {
+            title: {
+                text: ' '
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['成交金额']
+            },
+            xAxis: {
+                type: 'category',
+                data: chengji()
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: '成交金额',
+                type: 'line',
+                data: hengji()
+            }]
+        };
+        function chengji() {
+            let a = shij
+            return a
+        }
+        function hengji() {
+            let a = lanse
+            return a;
+        }
+        // 使用刚指定的配置项和数据显示图表
+        chart.setOption(option);
+    }
+    function yinian() {
+        var shij = ['2023-5-1',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+            '2023-5-8',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+            '2023-5-8',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+            '2023-5-8',
+            '2023-5-2',
+            '2023-5-3',
+            '2023-5-4',
+            '2023-5-5',
+            '2023-5-6',
+            '2023-5-7',
+            '2023-5-8',
+            '2023-5-2',
+        ]
+        var lanse = [
+            10, 20, 30, 12, 15,
+            184, 15, 654, 25, 19,
+            45, 32, 48, 56, 85,
+            75, 65, 51, 78, 95,
+            65, 85, 32, 95,
+            78, 95,
+            65, 85, 32, 95,
+        ]
+        // 配置项
+        var option = {
+            title: {
+                text: ' '
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['成交金额']
+            },
+            xAxis: {
+                type: 'category',
+                data: chengji()
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: '成交金额',
+                type: 'line',
+                data: hengji()
+            }]
+        };
+        function chengji() {
+            let a = shij
+            return a
+        }
+        function hengji() {
+            let a = lanse
+            return a;
+        }
+        // 使用刚指定的配置项和数据显示图表
+        chart.setOption(option);
+    }
+</script>
+
+</html>
