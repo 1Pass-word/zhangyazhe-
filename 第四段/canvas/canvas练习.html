@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        app {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #taiji {
+            background-color: aquamarine;
+        }
+
+        #bagua {
+            background-color: aquamarine;
+        }
+
+        #guoqi {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <canvas id="canvas" width="400" height="400"></canvas>
+        <canvas id="taiji" width="400" height="400"></canvas>
+        <canvas id="bagua" width="400" height="400"></canvas>
+        <canvas id="guoqi" width="400" height="400"></canvas>
+    </div>
+    <script>
+        (function () {
+
+            // Flag of the people's republic of china, made by KilArmd
+
+            var COLOR_RED = "#de2910";
+            var COLOR_YELLOW = "#ffde00";
+
+            var canvas = document.getElementById("guoqi");
+            var context = canvas.getContext("2d");
+
+            var WIDTH = canvas.width;
+            var UNIT = WIDTH / 30;
+            var HEIGHT = canvas.height = UNIT * 30;
+
+            context.fillStyle = COLOR_RED;
+            context.fillRect(0, 0, WIDTH, HEIGHT);
+
+            drawStar(context, 5 * UNIT, 5 * UNIT, 3 * UNIT, 5, COLOR_YELLOW);
+            [[10, 2], [12, 4], [12, 7], [10, 9]].forEach(function (coors) {
+                drawStar(context, coors[0] * UNIT, coors[1] * UNIT, UNIT, 5, COLOR_YELLOW,
+                    Math.atan((coors[1] - 5) / (coors[0] - 5)) + Math.PI);
+            });
+
+            function drawStar(context, cx, cy, radius, countSides, fillColor, startAngle) {
+                var pointer = startAngle == null ? - Math.PI / 2 : startAngle;
+                var angle = 2 * Math.PI / countSides;
+                context.beginPath();
+                for (var i = 0; i < countSides; i++) {
+                    context.lineTo(cx + radius * Math.cos(pointer), cy + radius * Math.sin(pointer));
+                    pointer += 2 * angle;
+                }
+                context.fillStyle = fillColor;
+                context.fill();
+                context.closePath();
+            }
+
+        }());
+    </script>
+    <script>
+        var canvas = document.getElementById('bagua');
+        var context = canvas.getContext('2d');
+        //先画一个大圆
+        context.beginPath();
+        context.arc(200, 200, 100, 0, 2 * Math.PI, false);
+        context.closePath();
+        context.fillStyle = "#fff";
+        context.lineWidth = 1;
+        context.fill();
+
+        //画左半边的半圆（从0.5*Math.PI-1.5*Math.PI）,颜色填充为黑色
+        context.beginPath();
+        context.arc(200, 200, 100, 0.5 * Math.PI, 1.5 * Math.PI, false);
+        context.closePath();
+        context.fillStyle = "#000";
+        context.fill();
+
+        //画左半边上面的半圆（从0.5*Math.PI-1.5*Math.PI）,颜色填充为白色
+        context.beginPath();
+        context.arc(200, 150, 50, 0.5 * Math.PI, 1.5 * Math.PI, false);
+        context.closePath();
+        context.fillStyle = "#fff";
+        context.fill();
+
+        //画右半边下面的半圆（从0.5*Math.PI-1.5*Math.PI）,颜色填充为黑色
+        context.beginPath();
+        context.arc(200, 250, 50, 0.5 * Math.PI, 1.5 * Math.PI, true);
+        context.closePath();
+        context.fillStyle = "#000";
+        context.fill();
+
+        //在上面的半圆内画一个比半圆小的整圆,颜色填充为黑色
+        context.beginPath();
+        context.arc(200, 150, 15, 0, 2 * Math.PI, false);
+        context.closePath();
+        context.fillStyle = "#000";
+        context.fill();
+
+        //在下面的半圆内画一个比半圆小的整圆,颜色填充为白色
+        context.beginPath();
+        context.arc(200, 250, 15, 0, 2 * Math.PI, false);
+        context.closePath();
+        context.fillStyle = "#fff";
+        context.fill();
+
+        context.beginPath();
+        context.moveTo(170, 50)
+        context.lineTo(230, 50)
+        context.lineWidth = 10
+        context.strokeStyle = '#000'
+        //画线
+        context.stroke()
+        context.beginPath();
+        context.moveTo(170, 65)
+        context.lineTo(230, 65)
+        context.lineWidth = 10
+        context.strokeStyle = '#000'
+        //画线
+        context.stroke()
+
+        context.beginPath();
+        context.moveTo(170, 80)
+        context.lineTo(230, 80)
+        context.lineWidth = 10
+        context.strokeStyle = '#000'
+        //画线
+        context.stroke()
+
+        context.beginPath();
+        context.moveTo(120, 53)
+        context.lineTo(100, 68)
+        context.lineWidth = 10
+        context.strokeStyle = '#000'
+        //画线
+        context.stroke()
+        context.beginPath();
+        context.moveTo(83, 83)
+        context.lineTo(65, 98)
+        context.lineWidth = 10
+        context.strokeStyle = '#000'
+        //画线
+        context.stroke()
+
+    </script>
+    <script>
+        var canvas = document.getElementById('taiji');
+        var context = canvas.getContext('2d');
+
+        //先画一个大圆
+        context.beginPath();
+        context.arc(200, 200, 200, 0, 2 * Math.PI, false);
+        context.closePath();
+        context.fillStyle = "#fff";
+        context.lineWidth = 1;
+        context.fill();
+
+        //画左半边的半圆（从0.5*Math.PI-1.5*Math.PI）,颜色填充为黑色
+        context.beginPath();
+        context.arc(200, 200, 200, 0.5 * Math.PI, 1.5 * Math.PI, false);
+        context.closePath();
+        context.fillStyle = "#000";
+        context.fill();
+
+        //画左半边上面的半圆（从0.5*Math.PI-1.5*Math.PI）,颜色填充为白色
+        context.beginPath();
+        context.arc(200, 100, 100, 0.5 * Math.PI, 1.5 * Math.PI, false);
+        context.closePath();
+        context.fillStyle = "#fff";
+        context.fill();
+
+        //画右半边下面的半圆（从0.5*Math.PI-1.5*Math.PI）,颜色填充为黑色
+        context.beginPath();
+        context.arc(200, 300, 100, 0.5 * Math.PI, 1.5 * Math.PI, true);
+        context.closePath();
+        context.fillStyle = "#000";
+        context.fill();
+
+        //在上面的半圆内画一个比半圆小的整圆,颜色填充为黑色
+        context.beginPath();
+        context.arc(200, 100, 30, 0, 2 * Math.PI, false);
+        context.closePath();
+        context.fillStyle = "#000";
+        context.fill();
+
+        //在下面的半圆内画一个比半圆小的整圆,颜色填充为白色
+        context.beginPath();
+        context.arc(200, 300, 30, 0, 2 * Math.PI, false);
+        context.closePath();
+        context.fillStyle = "#fff";
+        context.fill();
+
+    </script>
+    <script>
+        const el = document.querySelector('canvas')
+        const ctx = el.getContext('2d')
+        //填充画布颜色
+        ctx.fillStyle = '#8e44ad'
+        ctx.fillRect(0, 0, el.width, el.height)
+        //开始画线
+        ctx.beginPath()
+        //移动起始点
+        ctx.moveTo(0, 150)
+        //下一个节点
+        ctx.lineTo(400, 150)
+        //下一个节点
+        ctx.lineTo(80, 400)
+        ctx.lineTo(200, 0)
+        ctx.lineTo(320, 400)
+        //闭合节点
+        ctx.closePath()
+        //线宽
+        ctx.lineWidth = 10
+        //线颜色
+        ctx.strokeStyle = '#f1c40f'
+        //画线
+        ctx.stroke()
+    </script>
+
+</body>
+
+</html>
