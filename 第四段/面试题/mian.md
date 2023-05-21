@@ -1,3 +1,140 @@
+# 2023/5/21
+## 1
+### 补充 400 和 401、403 状态码
+(1)400 状态码：请求无效
+产生原因：
+前端提交数据的字段名称和字段类型与后台的实体没有保持一致
+前端提交到后台的数据应该是 json 字符串类型，但是前端没有将对象 JSON.stringify
+转化成字符串。
+解决方法：
+对照字段的名称，保持一致性
+将 obj 对象通过 JSON.stringify 实现序列化
+(2)401 状态码：当前请求需要用户验证
+(3)403 状态码：服务器已经得到请求，但是拒绝执行
+## 2
+### Cookie 和 session 的区别
+HTTP 是一个无状态协议，因此 Cookie 的最大的作用就是存储 sessionId 用来唯一标识
+用户。
+## 3
+### addEventListener 参数
+addEventListener其中，event 指定事件名；function 指定要事件触发时执行的函数；useCapture 指定
+事件是否在捕获或冒泡阶段执行。
+## 4
+### 前端优化
+降低请求量：合并资源，减少 HTTP 请求数，minify / gzip 压缩，webP，lazyLoad。
+加快请求速度：预解析 DNS，减少域名数，并行加载，CDN 分发。
+缓存：HTTP 协议缓存请求，离线缓存 manifest，离线数据缓存 localStorage。
+渲染：JS/CSS 优化，加载顺序，服务端渲染，pipeline。
+## 5
+### 说一下浏览器缓存
+缓存分为两种：强缓存和协商缓存，根据响应的 header 内容来决定。
+强缓存相关字段有 expires，cache-control。如果 cache-control 与 expires 同时存
+在的话，cache-control 的优先级高于 expires。
+协商缓存相关字段有 Last-Modified/If-Modified-Since，Etag/If-None-Match
+## 6
+### HTML5 新增的元素
+首先 html5 为了更好的实践 web 语义化，增加了 header，footer，nav,aside,section
+等语义化标签，在表单方面，为了增强表单，为 input 增加了 color，
+emial,data ,range 等类型，在存储方面，提供了 sessionStorage，localStorage,和
+离线存储，通过这些存储方式方便数据在客户端的存储和获取，在多媒体方面规定了
+音频和视频元素 audio 和 vedio，另外还有地理定位，canvas 画布，拖放，多线程编
+程的 web worker 和 websocket 协议。
+## 7
+### 输入 URL 到页面加载显示完成发生了什么?
+DNS 解析
+TCP 连接
+发送 HTTP 请求
+服务器处理请求并返回 HTTP 报文
+浏览器解析渲染页面
+连接结束
+## 8
+### 说一下对 Cookie 和 Session 的认知，Cookie 有哪些限制？
+1.
+cookie 数据存放在客户的浏览器上，session 数据放在服务器上。
+2.
+cookie 不是很安全，别人可以分析存放在本地的 COOKIE 并进行 COOKIE 欺
+骗
+考虑到安全应当使用 session。
+3.
+session 会在一定时间内保存在服务器上。当访问增多，会比较占用你服务
+器的性能
+考虑到减轻服务器性能方面，应当使用 COOKIE。
+4.
+单个 cookie 保存的数据不能超过 4K，很多浏览器都限制一个站点最多保存
+20 个 cookie。
+## 9
+### cookie 和 session 的区别
+1.
+cookie 数据存放在客户的浏览器上，session 数据放在服务器上。
+2.
+cookie 不是很安全，别人可以分析存放在本地的 COOKIE 并进行 COOKIE 欺
+骗
+考虑到安全应当使用 session。
+3.
+session 会在一定时间内保存在服务器上。当访问增多，会比较占用你服务
+器的性能
+考虑到减轻服务器性能方面，应当使用 COOKIE。
+4.
+单个 cookie 保存的数据不能超过 4K，很多浏览器都限制一个站点最多保存
+20 个 cookie。
+## 10
+### http 常见的请求方法
+get、post，这两个用的是最多的，还有很多比如 patch、delete、put、options 等等
+## 11
+### 闭包有什么缺陷？
+滥用闭包会造成内存泄漏，因为闭包中引用的的包裹函数中定义的变量永远不会被释放，所以我们在必要的时候机试释放这个闭包函数（赋值为null）
+## 12
+### javascript 的本地对象，内置对象和宿主对象有哪些?
+本地对象为array object regexp等可以new实例化
+内置对象为gload Math等不可以实例化的
+宿主为浏览器自带的documentwindow等
+## 13
+### ”==”和“===”的不同 a++ 和++a 有什么不同？
+==是只比较值是否相等
+			===比较数据类型和值 react只能使用===
+			A++ a先赋值，然后a自增1，最后返回赋值先进行表达式运算，再进行自增运算
+++a 将A自增然后返回a 先进行自增运算，再进行表达式运算。
+## 14
+### 简述link和import的区别？
+区别1: link 是HTML标签，除了加载CSS外，还可以定义RSS等其他事务; @import 属于CSS范畴，只能加载CSS。
+区别2:link引用CSS时，在页面载入时同时加载;@import需要页面网页完全载入以后加
+区别3: link 是HTML标签，无兼容问题，@import 是在CSS2.1提出的，低版本的浏览器不
+支持。
+区别4: link 支持使用Javascript 控制DOM去改变样式:而@import不支持。
+## 15
+### 哪些操作会造成内存泄露？
+大量使用全局变量
+大量使用闭包
+清除DOM节点时，只清除节点，而没有删除事件
+定时器不清除
+## 16
+### 使用箭头函数应该注意什么？
+1）用了箭头函数，this就不是指向window 而是声明时的外部环境
+	   （2）箭头函数不可以使用arguments（参数的集合）对象
+	   （3）箭头函数不能使用构造函数，也就是说不能使用new命令，否则会抛出一个错误
+	   （4）不可以使用yield 命令，因此箭头函数不能用作Generator
+## 17
+### es6怎么写class
+es6新增关键字吗，新增语法糖，他的绝大部分功能Es5都可以实现，新的class写法只是让原型对象的写法更加清晰，更像面向对象编程语法，
+可以实例化对象类中申明属性和方法属性声明在constructor中，对象和对象之间通过extends关键字实现继承
+## 18
+### Promise构造函数是同步执行还是异步执行，那么 then 方法呢？
+promise构造函数是同步执行的，then 方法是异步执行的
+## 19
+### promise 有几种状态 什么时候进入Cath
+promise有三种状态: pending/reslove/reject 。pending 就是未决，resolve 可以理解为成功，reject可以理解为拒绝。
+两个过程: pendding ->resolve、penHding -> rejected
+当pending为rejectd时，会进入catch
+## 20
+### 计算属性和实例方法有什么区别？
+计算属性有缓存，实例方法没有缓存
+计算属性调用时 total 不可以传参 实例方法调用时 total（）可以传参
+
+
+
+
+
+
 # jq 面试题：2023/5/18
 
 ## 1、
