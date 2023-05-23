@@ -1,3 +1,53 @@
+# 2023/5/23
+## 1. HTML5中的本地存储有哪些技术？
+- localStorage
+- sessionStorage
+- IndexedDB
+- Web SQL Database（已不再被HTML5标准支持）
+
+## 2. localStorage和sessionStorage的区别是什么？
+- localStorage的生命周期是永久的，而sessionStorage只在会话期间有效。
+
+## 3. 如何使用localStorage和sessionStorage进行本地存储？
+- 使用setItem方法存储数据
+- 使用getItem方法读取数据
+- 使用removeItem方法删除数据
+
+## 4. 如何使用IndexedDB进行本地存储？
+- 创建数据库、对象仓库和索引
+- 通过事务进行数据的增删改查操作
+
+## 5. Cookies有哪些限制？
+- 数据容量限制为4KB左右
+- 只能存储字符串类型的数据
+- 存储在Cookies中的数据会在每次HTTP请求时自动发送到服务器，可能会影响网络性能
+
+## 6. 如何实现本地存储的数据加密和解密？
+- 可以使用加密算法对数据进行加密和解密，常用的加密算法包括AES、DES和RSA等
+
+## 7、问：解释一些cookie和web storage的区别
+答：1cookie的大小是受限的，并且每次你请求一个新的页面的时候cookie都会被发送过去，
+这样无形中浪费了贷款，另外cookie还需要指定作用域，不可以跨域调用
+2除此之外，web storage拥有setItem、getItem、removeItem、clear等方法，不像coo
+kie需要前端开发者自己封装setCookie、getCookie
+3但是cookie也是不可或缺的：cookie的作用是与服务器进行交互，
+作为HTTP规范的一部分而存在，而web storage仅仅是为了在本地“存储”数据而生。
+## 8、问：什么时候使用cookie，什么情况下使用web storage
+答：存储密码这种需要在网络下进行操作的情况下使用cookie
+而从服务器中获取一条比较大的数据的时候这种情况下非常依赖带宽，就会使用到web storage存
+储对象、大量数据，然后从本地存储中获取数据（如一些文章信息或者购物车），可以减小服务
+器的压力，平常数据变化较小的时候用web storage
+## 9、问：localStorage的定义
+答：localStorage是在HTML5新提出来的存储方案，由于有的时候我们存储的信息较大，cookie就不
+能满足我们的需求，这时候localStorage就派上用场了，它不会随着刷新页面或者关闭页面而消失。
+## 10、问：sessionStorage的定义
+答：sessionStorage也是在HTML5新提出来的存储方案，主要用于临时保存某一窗口或者标签页的
+数据，刷新页面时不会删除，关闭窗口或者标签页之后将会删除这些数据。
+
+
+
+
+
 # 2023/5/21
 ## 1
 ### 补充 400 和 401、403 状态码
