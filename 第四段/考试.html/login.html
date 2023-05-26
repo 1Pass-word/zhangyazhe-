@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <link href="https://unpkg.com/layui@2.8.3/dist/css/layui.css" rel="stylesheet">
+    <script src="https://unpkg.com/layui@2.8.3/dist/layui.js"></script>
+</head>
+<style>
+    html,
+    body {
+        position: relative;
+        height: 100%;
+    }
+
+    body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+    }
+
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        z-index: 0;
+    }
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .swiper {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .fors {
+        width: 550px;
+        height: 380px;
+        background-color: rgb(255, 255, 255);
+        position: relative;
+        top: -75%;
+        left: 35%;
+        z-index: 1;
+        border-radius: 10px;
+        padding-top: 50px;
+        background: rgba(255, 255, 255, 0.5);
+    }
+
+    .layui-form-item .layui-form-checkbox[lay-skin=primary] {
+        margin-top: -52px;
+    }
+
+    .code {
+        font-family: Arial, 宋体;
+        font-style: italic;
+        color: green;
+        border: 0;
+        padding: 2px 3px;
+        letter-spacing: 3px;
+        font-weight: bolder;
+        position: relative;
+        top: 15px;
+        right: -215px;
+    }
+</style>
+<style>
+    .demo-login-container {
+        width: 320px;
+        margin: 21px auto 0;
+    }
+
+    .demo-login-other .layui-icon {
+        position: relative;
+        display: inline-block;
+        margin: 0 2px;
+        top: 2px;
+        font-size: 26px;
+    }
+
+    #yanzheng {
+        width: 318px;
+    }
+
+    .lougou {
+        width: 25px;
+        display: inline-block;
+        margin-left: 25%;
+    }
+
+    .spinner-6 {
+        width: 200px;
+        aspect-ratio: 1;
+        display: grid;
+        border: 4px solid #0000;
+        border-radius: 50%;
+        border-color: #ccc #0000;
+        animation: s6 1s infinite linear;
+        position: absolute;
+        top: 0px;
+        left: 45%;
+        margin-top: 20%;
+        z-index: 9999;
+    }
+
+    .spinner-6::before,
+    .spinner-6::after {
+        content: "";
+        grid-area: 1/1;
+        margin: 2px;
+        border: inherit;
+        border-radius: 50%;
+    }
+
+    .spinner-6::before {
+        border-color: #f03355 #0000;
+        animation: inherit;
+        animation-duration: 5s;
+        animation-direction: reverse;
+    }
+
+    .spinner-6::after {
+        margin: 8px;
+    }
+
+    @keyframes s6 {
+        100% {
+            transform: rotate(1turn)
+        }
+    }
+
+    #donghua {
+        z-index: 9998;
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+    }
+</style>
+
+<body>
+    <div id="donghua">
+        <div class="spinner-6"></div>
+    </div>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper"></div>
+    </div>
+    <div class="fors">
+        <img src="	http://101.34.139.112/static/img/logo.67745850.png" alt="" class="lougou">
+        <h2 style="display: inline-block;">MyAdmin后台管理系统</h2>
+        <form class="layui-form">
+            <div class="demo-login-container">
+                <div class="layui-form-item">
+                    <div class="layui-input-wrap">
+                        <div class="layui-input-prefix">
+                            <i class="layui-icon layui-icon-username"></i>
+                        </div>
+                        <input type="text" name="username" value="" lay-verify="required" placeholder="账   号(123)"
+                            lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear" id="username">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-wrap">
+                        <div class="layui-input-prefix">
+                            <i class="layui-icon layui-icon-password"></i>
+                        </div>
+                        <input type="password" name="password" value="" lay-verify="required" placeholder="密   码(123)"
+                            lay-reqtext="请填写密码" autocomplete="off" class="layui-input" lay-affix="eye" id="password">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-row">
+                        <div class="layui-col-xs7">
+                            <div class="layui-input-wrap">
+                                <div class="layui-input-prefix">
+                                    <i class="layui-icon layui-icon-vercode" id="cha"></i>
+                                </div>
+                                <input type="text" name="captcha" value="" lay-verify="required"
+                                    placeholder="验证码区分大小写的哦~" id="yanzheng" lay-reqtext="请填写验证码" autocomplete="off"
+                                    class="layui-input" lay-affix="clear">
+                                <input type="button" id="checkCode" class="code" style="width:100px"
+                                    onClick="createCode()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item"> <input type="checkbox" name="remember" lay-skin="primary" title="记住我"
+                        id="bendi">
+                </div>
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-login">登录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+<!-- 点击登录后的要做的事 -->
+<script>
+    $(window).on('load', function () {
+        setTimeout(function () {
+            $('#donghua').fadeOut('slow');
+        }, 2000);
+        let ben = localStorage.getItem("clab")
+        // console.log(ben);
+        if (ben) {
+            let xu = JSON.parse(ben)
+            $("#username").val(xu.username)
+            $("#password").val(xu.password)
+        } else {
+            console.log('本地暂无账号');
+        }
+    });
+    //验证码
+    var code; //在全局 定义验证码
+    createCode()
+    function createCode() {
+        code = new Array();
+        var codeLength = 4;//验证码的长度
+        var checkCode = document.getElementById("checkCode");
+        checkCode.value = "";
+        var selectChar = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+        for (var i = 0; i < codeLength; i++) {
+            var charIndex = Math.floor(Math.random() * 32);
+            code += selectChar[charIndex];
+        }
+        if (code.length != codeLength) {
+            createCode();
+        }
+        checkCode.value = code;
+    }
+    layui.use(function () {
+        var form = layui.form;
+        var layer = layui.layer;
+        if (localStorage.getItem('clab')) {
+            data = JSON.parse(localStorage.getItem('clab'))
+        }
+        // 提交事件
+        form.on('submit(demo-login)', function (data) {
+            var field = data.field; // 获取表单字段值
+            var arr = document.getElementById("bendi")
+            if (field.username == '123' && field.password == '123' && $('#yanzheng').val() == code) {
+                alert('登录成功')
+                let data = {
+                    username: field.username,
+                    password: field.password,
+                }
+                if (arr.checked == true) {
+                    localStorage.setItem('clab', JSON.stringify(data))
+                }
+                window.location.href = "head.html";
+            } else {
+                alert('登录失败')
+            }
+            return false; // 阻止默认 form 跳转
+        });
+    });
+</script>
+
+<script>
+    let arr = [
+        'https://img1.baidu.com/it/u=923771995,3123797363&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500',
+        'https://img0.baidu.com/it/u=3785423541,2011723354&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800',
+        'https://img0.baidu.com/it/u=651057167,1672858457&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500',
+    ]
+    fun()
+    function fun() {
+        let str = ''
+        for (let i in arr) {
+            str += `
+                    <div class="swiper-slide"><img src="${arr[i]}" alt=""></div>
+                `
+            $('.swiper-wrapper').append(str)
+        }
+    }
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: {
+            delay: 1000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
+
+
+</html>
