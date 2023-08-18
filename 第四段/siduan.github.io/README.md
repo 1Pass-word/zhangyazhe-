@@ -1,2 +1,0 @@
-# siduan.github.io
-kaoshiti
